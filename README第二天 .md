@@ -8,3 +8,4 @@ log4j的应用和学习。匿名代码块实现（父类静态代码块-->>子�
 
 ## 测试结果
 ![客户端](https://img-blog.csdnimg.cn/20200616212215951.png)![日志文件](https://img-blog.csdnimg.cn/20200616212238471.png)![服务器端](https://img-blog.csdnimg.cn/20200616212150217.png)
+CSDN社区博客：https://blog.csdn.net/weixin_44468294/article/details/106795647
