@@ -8,11 +8,11 @@
 
 	<Client class="com.briup.client.ClientImpl">
 		<ip>127.0.0.1</ip>
-		<port>10000</port>
+		<port>10001</port>
 	</Client>
 
 	<Server class="com.briup.server.ServerImpl">
-		<port>10000</port>
+		<port>10001</port>
 	</Server>
 
 	<DBStore class="com.briup.server.DBStoreImpl">
