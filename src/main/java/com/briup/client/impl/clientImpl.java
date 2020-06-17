@@ -6,10 +6,10 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Collection;
 
-import com.birup.bean.Environment;
+import com.briup.bean.Environment;
 import com.briup.client.client;
 import com.briup.util.Log;
-import com.briup.util.XML;
+import com.briup.util.Xml;
 import com.briup.util.impl.LogImpl;
 
 public class clientImpl implements client {
@@ -19,8 +19,8 @@ public class clientImpl implements client {
 	Log log = new LogImpl();
 
 	public void send(Collection<Environment> coll) throws Exception {
-		ip = XML.xmlpath("Client", "ip");
-		port = Integer.parseInt(XML.xmlpath("Client", "port"));
+		ip = Xml.xmlpath("Client", "ip");
+		port = Integer.parseInt(Xml.xmlpath("Client", "port"));
 		socket = new Socket(ip, port);
 		log.info("客户端正在和服务器建立连接...");
 		OutputStream os = socket.getOutputStream();

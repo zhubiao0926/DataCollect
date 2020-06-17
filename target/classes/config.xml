@@ -24,4 +24,9 @@
 			src/main/java/log4j.properties
 		</log4j-properties>
 	</Log>
+	<Connection class="com.briup.util.ConnectionFactory">
+		<JDBCConnection-properties>
+			src/main/java/jdbc.properties
+		</JDBCConnection-properties>
+	</Connection>
 </Environment>

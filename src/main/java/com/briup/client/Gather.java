@@ -2,7 +2,7 @@ package com.briup.client;
 
 import java.util.List;
 
-import com.birup.bean.Environment;
+import com.briup.bean.Environment;
 
 /*数据采集接口，采集数据
  * 封装成Environment对象

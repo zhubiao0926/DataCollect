@@ -8,7 +8,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-public class XML {
+public class Xml {
 	public static String xmlpath(String string1, String string2) throws DocumentException {
 		String path = null;
 		SAXReader sax = new SAXReader();

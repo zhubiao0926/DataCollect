@@ -4,13 +4,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.birup.bean.Environment;
+import com.briup.bean.Environment;
 import com.briup.client.Gather;
 import com.briup.util.Log;
-import com.briup.util.XML;
+import com.briup.util.Xml;
 import com.briup.util.impl.LogImpl;
 
 public class GatherImpl implements Gather {
@@ -29,7 +30,9 @@ public class GatherImpl implements Gather {
 		environment.setCount(Integer.parseInt(str[4]));
 		environment.setCmd(str[5]);
 		environment.setStatus(Integer.parseInt(str[7]));
-		environment.setGather_date(new Date(Long.parseLong(str[8])));
+		Long time = new Long(str[8]);
+		Timestamp timestamp = new Timestamp(time);
+		environment.setGather_date(timestamp);
 		return environment;
 
 	}
@@ -39,7 +42,7 @@ public class GatherImpl implements Gather {
 		 * 创建bufferReader逐行读取文件 分割后写入Environment对象 返回对象
 		 */
 		try {
-			String path = XML.xmlpath("Gather","path");
+			String path = Xml.xmlpath("Gather","path");
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path)));
 			String data = null;
 			int count1 = 0;

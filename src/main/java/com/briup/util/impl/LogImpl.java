@@ -2,16 +2,28 @@ package com.briup.util.impl;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.dom4j.DocumentException;
 
 import com.briup.util.Log;
+import com.briup.util.Xml;
 
 public class LogImpl implements Log{
-
+	
 	private Logger log;
     
     {
-    	//读其配置文件
-    	PropertyConfigurator.configure("src/main/java/log4j.properties");
+    	
+			String string;
+			try {
+				string = Xml.xmlpath("Log", "log4j-properties");
+			 	//读其配置文件
+		    	PropertyConfigurator.configure(string);
+			} catch (DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		 
+		
     	//获得总的输出对象
     	log= Logger.getRootLogger();
     }
@@ -40,5 +52,4 @@ public class LogImpl implements Log{
 		// TODO Auto-generated method stub
 		log.fatal(message);
 	}
-   
 }
