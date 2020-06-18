@@ -1,6 +1,9 @@
 package com.briup.server;
 
-public interface server {
-	public void receiver()throws Exception;
-	public void shutdown()throws Exception;
+import com.briup.util.WossModulelnit;
+
+public interface Server extends WossModulelnit {
+	public void receiver() throws Exception;
+
+	public void shutdown() throws Exception;
 }

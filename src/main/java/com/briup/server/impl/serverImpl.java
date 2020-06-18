@@ -8,47 +8,42 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collection;
 
-import javax.sound.midi.MidiDevice.Info;
-
 import com.briup.bean.Environment;
-import com.briup.server.server;
+import com.briup.server.Server;
+
 import com.briup.util.Log;
-import com.briup.util.Xml;
+import com.briup.util.Configuration;
 import com.briup.util.impl.LogImpl;
 
-public class serverImpl implements server {
-	private int port;
-	ServerSocket ss;
-	Socket socket;
-	InputStream is;
-	BufferedInputStream bis;
-	ObjectInputStream ois;
-	Log log = new LogImpl();
+public class ServerImpl implements Server {
+	public static String port;
+	private Collection<Environment> coll;
+	private ServerSocket ss;
+	private Socket socket;
+	private InputStream is;
+	private BufferedInputStream bis;
+	private ObjectInputStream ois;
+	public static Log log = new LogImpl();
+	private boolean flag = true;
+	DBStoreImpl instanceObject = (DBStoreImpl) Configuration.getInstanceObject("DBStore");
 
 	public void receiver() throws Exception {
-		port = Integer.parseInt(Xml.xmlpath("Server", "port"));
 		log.info("等待客户端连接");
-		ss = new ServerSocket(port);
+		ss = new ServerSocket(Integer.parseInt(port));
 		// 服务器一直处于开启状态，一旦遇到异常关闭
-		while (true) {
+		while (flag) {
 			try {
 				socket = ss.accept();
 				new Thread() {
-					private Collection<Environment> coll;
-
 					@Override
 					public void run() {
-						String ipAddress = socket.getInetAddress().getHostName();
-						log.info("客户端地址：" + ipAddress);
-
 						try {
-
 							ObjectInputStream ois = new ObjectInputStream(
 									new BufferedInputStream(socket.getInputStream()));
 							coll = (Collection<Environment>) ois.readObject();
 
 							log.info(getName() + "接受数据：" + coll.size());
-							new DBStoreImpl().save(coll);
+							instanceObject.save(coll);
 							log.info(getName() + "入库数据：" + coll.size());
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -70,7 +65,9 @@ public class serverImpl implements server {
 				// thread.start();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
+				flag = false;
 				e.printStackTrace();
+				log.error("服务器异常");
 				shutdown();
 			}
 		}
@@ -94,15 +91,6 @@ public class serverImpl implements server {
 			ss.close();
 		}
 
-	}
-
-	public static void main(String[] args) {
-		try {
-			new serverImpl().receiver();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }

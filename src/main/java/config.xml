@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Environment>
-	<Gather class="com.briup.client.GatherImpl">
+	<Gather class="com.briup.client.impl.GatherImpl">
 		<!--读取文件的路径 -->
 		<path>src/main/java/radwtmp</path>
-		<backup>src/main/java/backup</backup>
 	</Gather>
 
-	<Client class="com.briup.client.ClientImpl">
+	<Client class="com.briup.client.impl.ClientImpl">
 		<ip>127.0.0.1</ip>
 		<port>10001</port>
+		<backup>src/main/java/backup</backup>
 	</Client>
 
-	<Server class="com.briup.server.ServerImpl">
+	<Server class="com.briup.server.impl.ServerImpl">
 		<port>10001</port>
 	</Server>
 
-	<DBStore class="com.briup.server.DBStoreImpl">
+	<DBStore class="com.briup.server.impl.DBStoreImpl">
 		<batchSize>1000</batchSize>
 	</DBStore>
 
@@ -25,8 +25,8 @@
 		</log4j-properties>
 	</Log>
 	<Connection class="com.briup.util.ConnectionFactory">
-		<JDBCConnection-properties>
+		<path>
 			src/main/java/jdbc.properties
-		</JDBCConnection-properties>
+		</path>
 	</Connection>
 </Environment>

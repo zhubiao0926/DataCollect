@@ -3,7 +3,6 @@ package com.briup.client.impl;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +10,10 @@ import java.util.List;
 import com.briup.bean.Environment;
 import com.briup.client.Gather;
 import com.briup.util.Log;
-import com.briup.util.Xml;
 import com.briup.util.impl.LogImpl;
 
 public class GatherImpl implements Gather {
-	String path = null;
+	public static String path = null;
 	// 存放Environment对象的集合对象
 	List<Environment> list = new ArrayList<Environment>();
 	Log log = new LogImpl();
@@ -42,7 +40,6 @@ public class GatherImpl implements Gather {
 		 * 创建bufferReader逐行读取文件 分割后写入Environment对象 返回对象
 		 */
 		try {
-			String path = Xml.xmlpath("Gather","path");
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path)));
 			String data = null;
 			int count1 = 0;
@@ -94,8 +91,8 @@ public class GatherImpl implements Gather {
 	}
 
 	public static void main(String[] args) {
-		List<Environment> gather = new GatherImpl().gather();
-		
+		GatherImpl gatherImpl = new GatherImpl();
+		System.out.println(gatherImpl);
 	}
 
 }

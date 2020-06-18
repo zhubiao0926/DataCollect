@@ -3,20 +3,18 @@ package com.briup.server.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import com.briup.bean.Environment;
 import com.briup.server.DBStore;
 import com.briup.util.ConnectionFactory;
 import com.briup.util.Log;
-import com.briup.util.Xml;
 import com.briup.util.impl.LogImpl;
 
 public class DBStoreImpl implements DBStore {
 	private Connection connection;
 	private PreparedStatement ps;
-	private int batchSize;
+	public static String batchSize;
 	Log log = new LogImpl();
 
 	public void save(Collection<Environment> coll) throws Exception {
@@ -28,7 +26,6 @@ public class DBStoreImpl implements DBStore {
 		 * 记录当前天数，默认为0
 		 */
 		int day = 0;
-		batchSize = Integer.parseInt(Xml.xmlpath("DBStore", "batchSize"));
 		for (Environment environment : coll) {
 			/*
 			 * 先判断要不要创建新的ps对象。 如果为null或者天数改变，则创建新的对象
@@ -65,12 +62,12 @@ public class DBStoreImpl implements DBStore {
 			ps.addBatch();
 			count++;
 
-			if (count % batchSize == 0) {
+			if (count % Integer.parseInt(batchSize) == 0) {
 				ps.executeBatch();
 			}
 		}
 		dealBatch();
-		//循环结束提交数据
+		// 循环结束提交数据
 		log.info("数据库入库的数据" + count);
 	}
 

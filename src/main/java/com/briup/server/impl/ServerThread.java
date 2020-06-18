@@ -14,6 +14,7 @@ public class ServerThread extends Thread {
 	private Socket socket;
 	private Log log;
 	private Collection<Environment> coll;
+
 	public Log getLog() {
 		return log;
 	}
@@ -40,7 +41,7 @@ public class ServerThread extends Thread {
 			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
 			coll = (Collection<Environment>) ois.readObject();
 
-			log.info(getName() + "接受数据：" + coll.size() );
+			log.info(getName() + "接受数据：" + coll.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
