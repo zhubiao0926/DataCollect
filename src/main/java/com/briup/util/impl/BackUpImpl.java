@@ -7,9 +7,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import com.briup.util.BackUp;
+import com.briup.util.Log;
 
 public class BackUpImpl implements BackUp {
-	
+	Log log = new LogImpl();
 	
 	public void backUps(String filepath,Object object, boolean append) throws Exception {
 		File file = new File(filepath);
@@ -29,10 +30,11 @@ public class BackUpImpl implements BackUp {
 			return null;
 		ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
 		Object object = objectInputStream.readObject();
+		objectInputStream.close();
 		if (del) {
 			file.delete();
+			log.info("删除成功");
 		}
-		objectInputStream.close();
 		return object;
 
 	}

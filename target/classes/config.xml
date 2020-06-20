@@ -13,16 +13,17 @@
 
 	<Server class="com.briup.server.impl.ServerImpl">
 		<port>10001</port>
+		<backup>src/main/java/backup</backup>
 	</Server>
 
 	<DBStore class="com.briup.server.impl.DBStoreImpl">
 		<batchSize>1000</batchSize>
 	</DBStore>
 
-	<Log class="com.briup.util.LogImpl">
-		<log4j-properties>
+	<Log class="com.briup.util.impl.LogImpl">
+		<path>
 			src/main/java/log4j.properties
-		</log4j-properties>
+		</path>
 	</Log>
 	<Connection class="com.briup.util.ConnectionFactory">
 		<path>

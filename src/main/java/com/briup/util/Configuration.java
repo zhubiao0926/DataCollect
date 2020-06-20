@@ -25,8 +25,9 @@ public class Configuration {
 		}
 	}
 
+	//
 	// public static Object getInstanceObject(String sonName,String... fieldName) {
-	// // 获取所有的子元素Love
+	// // 获取所有的子元素
 	// List<Element> elements = root.elements(sonName);
 	// //子节点个数
 	// int nodeCount = root.element(sonName).nodeCount();
@@ -60,9 +61,10 @@ public class Configuration {
 		String gatherClassPath = root.element(sonName).attributeValue("class");
 		// 要返回的对象
 		Object newInstance = null;
-		// 最终属性值
+		// 要赋值的属性值
 		String elementTextTrim = null;
-		String name;
+		// 要赋值的属性名
+		String name =null;
 
 		try {
 			Class<?> gatherClass = Class.forName(gatherClassPath);

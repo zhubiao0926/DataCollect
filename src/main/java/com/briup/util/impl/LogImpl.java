@@ -3,19 +3,19 @@ package com.briup.util.impl;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import com.briup.util.Configuration;
 import com.briup.util.Log;
 
 public class LogImpl implements Log {
 
-	private Logger log;
+	private static Logger log;
+	public static String path;
 
-	{
-
-		String string;
+	static{
 		try {
-			// string = Xml.xmlpath("Log", "log4j-properties");
 			// 读其配置文件
-			PropertyConfigurator.configure("src/main/java/log4j.properties");
+			Configuration.getInstanceObject("Log");
+			PropertyConfigurator.configure(path);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
